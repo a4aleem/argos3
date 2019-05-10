@@ -42,16 +42,10 @@
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="1, 1, 2" center="0,0,1" positional_grid_size="50,50,1">
-    <distribute>
-      <position method="uniform" min="-0.25,-0.25,0.1" max="0.25,0.25,0.15" />
-      <orientation method="uniform" min="-30,-30,-30" max="30,30,30" />
-      <entity quantity="5" max_trials="100" base_num="100">
-        <e-puck id="ep">
-          <controller config="lua" />
-        </e-puck>
-      </entity>
-    </distribute>
-
+     <e-puck id="ep">
+       <body position="0,0,0.25" orientation="0,180,0" />
+       <controller config="lua" />
+     </e-puck>
   </arena>
 
   <!-- ******************* -->
@@ -59,7 +53,7 @@
   <!-- ******************* -->
   <physics_engines>
     <dynamics3d id="dyn3d" iterations="20">
-      <floor height="0.01"/>
+      <floor />
       <gravity g="9.8" />
     </dynamics3d>
   </physics_engines>

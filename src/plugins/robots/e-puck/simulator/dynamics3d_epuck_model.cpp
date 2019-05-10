@@ -171,10 +171,9 @@ namespace argos {
    /****************************************/
 
    void CDynamics3DEPuckModel::UpdateOriginAnchor(SAnchor& s_anchor) {
-      /* copy the base transform */
-      btTransform cTransform(m_cBaseOffset.inverse());
-      cTransform *= m_ptrBase->GetTransform();
-      
+      /* calculate the anchor transform */
+      btTransform cTransform = 
+            m_ptrBase->GetTransform() * m_cBaseGeometricOffset * m_cBaseOffset.inverse();
       const btVector3& cPosition = cTransform.getOrigin();
       const btQuaternion& cOrientation = cTransform.getRotation();
       /* Swap coordinate system and set anchor position */
@@ -184,6 +183,7 @@ namespace argos {
                                cOrientation.getX(),
                               -cOrientation.getZ(),
                                cOrientation.getY());
+      std::cerr << "s_anchor.Position = " << s_anchor.Position << std::endl;
    }
 
    /****************************************/
